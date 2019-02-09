@@ -1,4 +1,4 @@
-import { LOADING, FETCHING_SUCCESS } from "../actions"
+import { LOADING, FETCHING_SUCCESS, FETCHING_ERROR, ADD_SMURF } from "../actions"
 
 /*
   Be sure to import in all of the action types from `../actions`
@@ -35,6 +35,22 @@ export const SmurfReducer = (state = initialState , action) => {
         smurfs: action.payload,
         error: null
       }
+    case FETCHING_ERROR:
+      return {
+        ...state,
+        fetchingSmurfs: false,
+        error: action.payload
+      }
+
+    
+    case ADD_SMURF:
+      return {
+        ...state,
+        fetchingSmurfs:false,
+        smurfs: action.payload,
+        error:null
+      }
+
     default:
       return state;
   }

@@ -3,8 +3,10 @@ import './App.css';
 
 import { connect } from "react-redux";
 
-import {fetchSmurfs} from "../actions"
+import {fetchSmurfs, addSmurf} from "../actions"
 
+
+import AddSmurf from "./AddSmurf"
 import SmurfList from "./SmurfList"
 /*
  to wire this component up you're going to need a few things.
@@ -31,6 +33,8 @@ class App extends Component {
         <div>Start inside of your `src/index.js` file!</div>
         <div>Have fun!</div>
         <SmurfList smurfs = {this.props.smurfs}/>
+        <AddSmurf addSmurf = {this.props.addSmurf} />
+
       </div>
     );
   }
@@ -43,4 +47,4 @@ const mstp = state =>{
   }
 }
 
-export default connect(mstp, {fetchSmurfs})(App);
+export default connect(mstp, {fetchSmurfs, addSmurf})(App);

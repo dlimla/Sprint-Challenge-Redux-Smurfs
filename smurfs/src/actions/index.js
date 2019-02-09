@@ -19,6 +19,9 @@ import axios from 'axios';
 
 export const LOADING = "LOADING";
 export const FETCHING_SUCCESS = "FETCHING_SUCCESS"
+export const FETCHING_ERROR = "FETCHING_ERROR"
+
+export const ADD_SMURF = "ADD_SMURF"
 
 
 export const fetchSmurfs = () => (dispatch) => {
@@ -26,13 +29,37 @@ export const fetchSmurfs = () => (dispatch) => {
   axios
     .get('http://localhost:3333/smurfs')
     .then(response => {
-      console.log(response)
+      // console.log("ACTION:", response)
       dispatch({
         type:FETCHING_SUCCESS,
         payload: response.data
       })
     })
     .catch(error => {
-      console.log(error)
+      // console.log("ERROR:", error)
+      dispatch({
+        type:FETCHING_ERROR,
+        payload:
+        "ERROR GETTING SMURFS"
+      })
+    })
+}
+
+export const addSmurf = (smurf) => (dispatch) => {
+  dispatch({
+    type:LOADING
+  })
+  axios
+    .post('http://localhost:3333/smurfs', smurf)
+    .then(response => dispatch( {
+      type:ADD_SMURF,
+      payload:response.data
+    }))
+    .catch(error=> {
+      dispatch({
+        type:FETCHING_ERROR,
+        payload:
+        "CANNOT ADD SMURFS"
+      })
     })
 }
